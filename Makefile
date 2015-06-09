@@ -1,4 +1,4 @@
-PROJECT = JLRPOCX015.GoogleMaps
+PROJECT = OPENIVI015.GoogleMaps
 INSTALL_FILES = images js icon.png index.html
 WRT_FILES = DNA_common css icon.png index.html setup config.xml images js manifest.json README.md
 VERSION := 0.0.1
@@ -28,18 +28,18 @@ kill.xwalk:
 	ssh root@$(TIZEN_IP) "pkill xwalk"
 
 kill.feb1:
-	ssh app@$(TIZEN_IP) "pkgcmd -k JLRPOCX015.GoogleMaps"
+	ssh app@$(TIZEN_IP) "pkgcmd -k OPENIVI015.GoogleMaps"
 
 run: install
 	ssh app@$(TIZEN_IP) "export DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/5000/dbus/user_bus_socket' && xwalkctl | egrep -e 'GoogleMaps' | awk '{print $1}' | xargs --no-run-if-empty xwalk-launcher -d "
 
 run.feb1: install.feb1
-	ssh app@$(TIZEN_IP) "app_launcher -s JLRPOCX015.GoogleMaps -d "
+	ssh app@$(TIZEN_IP) "app_launcher -s OPENIVI015.GoogleMaps -d "
 
 install.feb1: deploy
 ifndef OBS
-	-ssh app@$(TIZEN_IP) "pkgcmd -u -n JLRPOCX015 -q"
-	ssh app@$(TIZEN_IP) "pkgcmd -i -t wgt -p /home/app/JLRPOCX015.GoogleMaps.wgt -q"
+	-ssh app@$(TIZEN_IP) "pkgcmd -u -n OPENIVI015 -q"
+	ssh app@$(TIZEN_IP) "pkgcmd -i -t wgt -p /home/app/OPENIVI015.GoogleMaps.wgt -q"
 endif
 
 install: deploy
@@ -66,22 +66,22 @@ clean:
 boxcheck: tizen-release
 	ssh root@$(TIZEN_IP) "cat /etc/tizen-release" | diff tizen-release - ; if [ $$? -ne 0 ] ; then tput setaf 1 ; echo "tizen-release version not correct"; tput sgr0 ;exit 1 ; fi
 
-install_obs: 
+install_obs:
 	mkdir -p ${DESTDIR}/opt/usr/apps/.preinstallWidgets
-	cp -r JLRPOCX015.GoogleMaps.wgt ${DESTDIR}/opt/usr/apps/.preinstallWidgets/
+	cp -r OPENIVI015.GoogleMaps.wgt ${DESTDIR}/opt/usr/apps/.preinstallWidgets/
 
-common: /opt/usr/apps/common-apps
-	cp -r /opt/usr/apps/common-apps DNA_common
+common: /opt/usr/apps/openivi-common-app
+	cp -r /opt/usr/apps/openivi-common-app DNA_common
 
-/opt/usr/apps/common-apps:
+/opt/usr/apps/openivi-common-app:
 	@echo "Please install Common Assets"
 	exit 1
 
-dev-common: ../common-app
-	cp -rf ../common-app ./DNA_common
+dev-common: ../openivi-common-app
+	cp -rf ../openivi-common-app ./DNA_common
 	rm -rf DNA_common/.git
 
-../common-app:
+../openivi-common-app:
 	#@echo "Please checkout Common Assets"
 	#exit 1
-	git clone  git@github.com:PDXostc/common-app.git ../common-app
+	git clone git@github.com:konsulko/openivi-common-app.git ../openivi-common-app
