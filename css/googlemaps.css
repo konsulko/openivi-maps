@@ -10,7 +10,7 @@
 
 .content {
 	flex: 1;
-	padding: 20px;
+	padding: 2px;
 }
 
 .label,
@@ -75,19 +75,29 @@
 	background-color: transparent !important;
 }
 
+.oneLineEllipsis {
+	font-size: 2rem;
+}
+
 #turn-arrow {
 	width: 100%;
-	height: 70px;
+	height: 24px;
 	background-repeat: no-repeat;
 	background-position: center center;
 }
 
 #navigation-panel {
 	flex: 9;
+	font-size: 2rem;
+	padding-top: 15px;
 }
 
 #indicators {
 	margin-right: 20px;
+}
+
+#nav-directions {
+	height: 55px;
 }
 
 #nav-directions p,
@@ -96,15 +106,15 @@
 }
 
 #nav-data-top .content {
-	height: 200px;
+	height: 90px;
 }
 
 #nav-data-bottom {
-	height: 180px;
+	height: 70px;
 }
 
 #distance-to > small {
-	font-size: .8em;
+	font-size: 2rem;
 	color: rgba(196, 196, 196, 0.8);
 	padding-left: 6px;
 }
@@ -136,19 +146,26 @@
 }
 
 #destination-address {
-	margin-top: 2px;
+	margin: 0;
+	font-size: 1.5rem;
 }
 
 #destination-address-town {
-	margin-top: 2px;
+	margin: 0;
+	font-size: 1.5rem;
 }
 
 #still-to-go-time-and-distance {
 	margin: 0;
+	font-size: 1.5rem;
 }
 
 #still-to-go-time-and-distance > .time:after {
 	content: "/";
+}
+
+#arrival-text {
+	font-size: 1.5rem;
 }
 
 #arrival-text:before {
@@ -175,8 +192,8 @@
 	right: 0;
 	bottom: 0;
 	position: absolute;
-	width: 180px;
-	height: 180px;
+	width: 90px;
+	height: 90px;
 }
 
 .satellite-icon {
